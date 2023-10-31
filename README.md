@@ -46,3 +46,9 @@ npx prisma init
 ...
 npx prisma migrate dev
 ```
+
+Configuração do VITEST
+```sh
+npm i -D vitest unplugin-swc @swc/core @vitest/coverage-v8 vite-tsconfig-paths
+```
+
