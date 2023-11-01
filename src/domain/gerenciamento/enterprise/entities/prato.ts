@@ -37,7 +37,7 @@ export class Prato extends Entity<PratoProps> {
   }
 
   set preco(preco: number) {
-    this.props.preco = preco
+    this.props.preco = +preco.toFixed(2)
     this.atualiza()
   }
 
