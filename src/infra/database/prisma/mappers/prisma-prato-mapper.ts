@@ -23,6 +23,7 @@ export class PrismaPratoMapper {
       ds_nome: prato.nome,
       ds_descricao: prato.descricao,
       vl_preco: prato.preco,
+      fg_ativo: prato.ativo,
       incluido_em: prato.incluidoEm,
       atualizado_em: prato.atualizadoEm,
     }
