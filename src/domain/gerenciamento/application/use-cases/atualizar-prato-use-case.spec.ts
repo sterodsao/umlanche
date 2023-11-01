@@ -3,22 +3,22 @@ import { makePratoFactory } from 'test/factories/gerenciamento/make-prato-factor
 import { InMemoryPratoRepository } from 'test/repositories/gerenciamento/in-memory-prato-repository'
 import { Prato } from '../../enterprise/entities/prato'
 import {
-  EditarPratoUseCase,
-  EditarPratoUseCaseRequest,
+  AtualizarPratoUseCase,
+  AtualizarPratoUseCaseRequest,
 } from './atualizar-prato-use-case'
 import { InvalidArgumentPrecoError } from './errors/invalid-argument-preco'
 
 let inMemoryPratoRepository: InMemoryPratoRepository
-let sut: EditarPratoUseCase
+let sut: AtualizarPratoUseCase
 
 beforeEach(() => {
   inMemoryPratoRepository = new InMemoryPratoRepository()
-  sut = new EditarPratoUseCase(inMemoryPratoRepository)
+  sut = new AtualizarPratoUseCase(inMemoryPratoRepository)
 })
 
 test('Dado um prato que não existe, ao executar o caso de uso AtualizarPrato, ele deve retornar um erro de Recurso não encontrado.', async () => {
   // Given
-  const request: EditarPratoUseCaseRequest = {
+  const request: AtualizarPratoUseCaseRequest = {
     pratoId: '1',
     nome: 'Novo nome',
     descricao: 'Nova descrição',
@@ -39,7 +39,7 @@ test('Dado um prato válido, ao executar o caso de uso EditarPrato, ele deve ser
   const prato = makePratoFactory()
   inMemoryPratoRepository.items.push(prato)
 
-  const request: EditarPratoUseCaseRequest = {
+  const request: AtualizarPratoUseCaseRequest = {
     pratoId: prato.id.toString(),
     nome: 'Novo nome',
     descricao: 'Nova descrição',
@@ -70,7 +70,7 @@ test('Ao fornecer parâmetros de entrada inválidos, ele deve retornar um erro d
   inMemoryPratoRepository.items.push(prato)
 
   // Given
-  const request: EditarPratoUseCaseRequest = {
+  const request: AtualizarPratoUseCaseRequest = {
     pratoId: prato.id.toString(),
     nome: 'Novo nome',
     descricao: 'Nova descrição',

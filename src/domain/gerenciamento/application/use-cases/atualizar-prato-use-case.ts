@@ -4,19 +4,19 @@ import { InvalidArgumentPrecoError } from './errors/invalid-argument-preco'
 import { PratoRepository } from '../repositories/prato-repository'
 import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-error'
 
-export interface EditarPratoUseCaseRequest {
+export interface AtualizarPratoUseCaseRequest {
   pratoId: string
   nome: string
   descricao: string
   preco: number
 }
 
-export type EditarPratoUseCaseResponse = Either<
+export type AtualizarPratoUseCaseResponse = Either<
   ResourceNotFoundError | InvalidArgumentPrecoError,
   { prato: Prato }
 >
 
-export class EditarPratoUseCase {
+export class AtualizarPratoUseCase {
   constructor(private pratoRepository: PratoRepository) {}
 
   async execute({
@@ -24,7 +24,7 @@ export class EditarPratoUseCase {
     nome,
     descricao,
     preco,
-  }: EditarPratoUseCaseRequest): Promise<EditarPratoUseCaseResponse> {
+  }: AtualizarPratoUseCaseRequest): Promise<AtualizarPratoUseCaseResponse> {
     if (preco < 0) return left(new InvalidArgumentPrecoError(preco.toString()))
     const prato = await this.pratoRepository.findById(pratoId)
     if (!prato) return left(new ResourceNotFoundError())
