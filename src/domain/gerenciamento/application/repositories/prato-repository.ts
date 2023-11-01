@@ -1,9 +1,9 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { Prato } from '../../enterprise/entities/prato'
 
-export interface PratoRepository {
-  findById(id: string): Promise<Prato | null>
-  findMany(params: PaginationParams): Promise<Prato[]>
-  save(prato: Prato): Promise<void>
-  create(prato: Prato): Promise<void>
+export abstract class PratoRepository {
+  abstract findById(id: string): Promise<Prato | null>
+  abstract findMany(params: PaginationParams): Promise<Prato[]>
+  abstract save(prato: Prato): Promise<void>
+  abstract create(prato: Prato): Promise<void>
 }
