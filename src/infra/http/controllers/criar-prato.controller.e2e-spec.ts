@@ -24,7 +24,7 @@ describe('Criar prato (E2E)', () => {
     const response = await request(app.getHttpServer()).post('/prato').send({
       nome: 'Feijoada',
       descricao: 'Prato de feijoada delicioso',
-      preco: 29.3,
+      preco: 29.356,
     })
 
     expect(response.statusCode).toBe(201)
@@ -34,5 +34,6 @@ describe('Criar prato (E2E)', () => {
     })
 
     expect(pratoOnDatabase).toBeTruthy()
+    expect(pratoOnDatabase.vl_preco.toNumber()).toEqual(29.36)
   })
 })
