@@ -73,6 +73,7 @@ export class Prato extends Entity<PratoProps> {
     return new Prato(
       {
         ...props,
+        preco: +props.preco.toFixed(2),
         ativo: props.ativo ?? true,
         incluidoEm: props.incluidoEm ?? new Date(),
       },
