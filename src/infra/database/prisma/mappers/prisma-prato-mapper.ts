@@ -7,11 +7,11 @@ export class PrismaPratoMapper {
     return Prato.create(
       {
         nome: raw.ds_nome,
-        descricao: raw.ds_descricao,
+        ingredientes: raw.ds_ingredientes,
         preco: (raw.vl_preco /= 100),
         ativo: raw.fg_ativo,
         incluidoEm: raw.incluido_em,
-        atualizadoEm: raw.atualizado_em,
+        atualizadoEm: raw.alterado_em,
       },
       new UniqueEntityID(raw.id_prato),
     )
@@ -21,11 +21,11 @@ export class PrismaPratoMapper {
     return {
       id_prato: prato.id.toString(),
       ds_nome: prato.nome,
-      ds_descricao: prato.descricao,
+      ds_ingredientes: prato.ingredientes,
       vl_preco: (prato.preco *= 100),
       fg_ativo: prato.ativo,
       incluido_em: prato.incluidoEm,
-      atualizado_em: prato.atualizadoEm,
+      alterado_em: prato.atualizadoEm,
     }
   }
 }

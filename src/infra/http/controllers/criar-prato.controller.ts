@@ -5,7 +5,7 @@ import { NestCriarPratoUseCase } from '@/infra/nest/nest-criar-prato-use-case'
 
 const criarPratoBodySchema = z.object({
   nome: z.string().min(3).max(100),
-  descricao: z.string().min(3).max(200),
+  ingredientes: z.string().min(3).max(200),
   preco: z.number(),
 })
 
@@ -19,9 +19,9 @@ export class CriarPratoController {
 
   @Post()
   async handle(@Body(bodyValidationPipe) body: CriarPratoBodySchema) {
-    const { nome, descricao, preco } = body
+    const { nome, ingredientes, preco } = body
 
-    const result = await this.sut.execute({ nome, descricao, preco })
+    const result = await this.sut.execute({ nome, ingredientes, preco })
 
     if (result.isLeft()) throw new BadRequestException()
   }

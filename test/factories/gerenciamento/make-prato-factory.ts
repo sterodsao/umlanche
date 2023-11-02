@@ -15,7 +15,7 @@ export function makePratoFactory(
   return Prato.create(
     {
       nome: faker.lorem.sentence(2),
-      descricao: faker.lorem.sentence(5),
+      ingredientes: faker.lorem.sentence(5),
       preco: faker.number.float(),
       ...override,
     },

@@ -12,7 +12,7 @@ import { NestAtualizarPratoUseCase } from '@/infra/nest/nest-atualizar-prato-use
 
 const atualizarPratoBodySchema = z.object({
   nome: z.string().min(3).max(100),
-  descricao: z.string().min(3).max(200),
+  ingredientes: z.string().min(3).max(200),
   preco: z.number(),
 })
 
@@ -30,9 +30,9 @@ export class AtualizarPratoController {
     @Body(bodyValidationPipe) body: AtualizarPratoBodySchema,
     @Param('id') pratoId: string,
   ) {
-    const { nome, descricao, preco } = body
+    const { nome, ingredientes, preco } = body
 
-    const result = await this.sut.execute({ pratoId, nome, descricao, preco })
+    const result = await this.sut.execute({ pratoId, nome, ingredientes, preco })
 
     if (result.isLeft()) throw new BadRequestException(result.value.message)
   }

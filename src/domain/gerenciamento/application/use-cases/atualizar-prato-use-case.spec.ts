@@ -21,7 +21,7 @@ test('Dado um prato que não existe, ao executar o caso de uso AtualizarPrato, e
   const request: AtualizarPratoUseCaseRequest = {
     pratoId: '1',
     nome: 'Novo nome',
-    descricao: 'Nova descrição',
+    ingredientes: 'Nova descrição',
     preco: 10,
   }
 
@@ -42,7 +42,7 @@ test('Dado um prato válido, ao executar o caso de uso EditarPrato, ele deve ser
   const request: AtualizarPratoUseCaseRequest = {
     pratoId: prato.id.toString(),
     nome: 'Novo nome',
-    descricao: 'Nova descrição',
+    ingredientes: 'Nova descrição',
     preco: 10,
   }
 
@@ -73,7 +73,7 @@ test('Ao fornecer parâmetros de entrada inválidos, ele deve retornar um erro d
   const request: AtualizarPratoUseCaseRequest = {
     pratoId: prato.id.toString(),
     nome: 'Novo nome',
-    descricao: 'Nova descrição',
+    ingredientes: 'Nova descrição',
     preco: -10,
   }
 

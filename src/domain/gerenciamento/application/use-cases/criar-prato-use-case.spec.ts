@@ -18,7 +18,7 @@ test('Dado informações válidas, ao executar o caso de uso CriarPrato, então 
   // Given
   const request: CriarPratoUseCaseRequest = {
     nome: 'Prato 01',
-    descricao: 'Descrição prato 01',
+    ingredientes: 'Descrição prato 01',
     preco: 5,
   }
   // When
@@ -37,7 +37,7 @@ test('Dado informações inválidas, ao executar o caso de uso CriarPrato, entã
   // Given
   const request: CriarPratoUseCaseRequest = {
     nome: 'Prato 01',
-    descricao: 'Descrição prato 01',
+    ingredientes: 'Descrição prato 01',
     preco: -5,
   }
   // When

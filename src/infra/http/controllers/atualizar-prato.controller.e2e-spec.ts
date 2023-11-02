@@ -33,7 +33,7 @@ describe('Atualizar prato (E2E)', () => {
       .put(`/prato/${pratoId}`)
       .send({
         nome: 'Prato atualizado',
-        descricao: 'Descrição nova',
+        ingredientes: 'Descrição nova',
         preco: 5,
       })
 
@@ -43,7 +43,7 @@ describe('Atualizar prato (E2E)', () => {
     const questionOnDatabase = await prisma.prato.findFirst({
       where: {
         ds_nome: 'Prato atualizado',
-        ds_descricao: 'Descrição nova',
+        ds_ingredientes: 'Descrição nova',
       },
     })
 

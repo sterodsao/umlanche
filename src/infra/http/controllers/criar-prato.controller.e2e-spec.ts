@@ -23,7 +23,7 @@ describe('Criar prato (E2E)', () => {
   test('[POST] /prato', async () => {
     const response = await request(app.getHttpServer()).post('/prato').send({
       nome: 'Feijoada',
-      descricao: 'Prato de feijoada delicioso',
+      ingredientes: 'Prato de feijoada delicioso',
       preco: 29.356,
     })
 

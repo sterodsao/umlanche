@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 
 export interface PratoProps {
   nome: string
-  descricao: string
+  ingredientes: string
   preco: number
   ativo: boolean
   incluidoEm: Date
@@ -23,12 +23,12 @@ export class Prato extends Entity<PratoProps> {
     this.atualiza()
   }
 
-  get descricao() {
-    return this.props.descricao
+  get ingredientes() {
+    return this.props.ingredientes
   }
 
-  set descricao(descricao: string) {
-    this.props.descricao = descricao
+  set ingredientes(ingredientes: string) {
+    this.props.ingredientes = ingredientes
     this.atualiza()
   }
 

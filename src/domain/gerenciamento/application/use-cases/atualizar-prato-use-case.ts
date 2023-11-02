@@ -7,7 +7,7 @@ import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-e
 export interface AtualizarPratoUseCaseRequest {
   pratoId: string
   nome: string
-  descricao: string
+  ingredientes: string
   preco: number
 }
 
@@ -22,14 +22,14 @@ export class AtualizarPratoUseCase {
   async execute({
     pratoId,
     nome,
-    descricao,
+    ingredientes,
     preco,
   }: AtualizarPratoUseCaseRequest): Promise<AtualizarPratoUseCaseResponse> {
     if (preco < 0) return left(new InvalidArgumentPrecoError(preco.toString()))
     const prato = await this.pratoRepository.findById(pratoId)
     if (!prato) return left(new ResourceNotFoundError())
     prato.nome = nome
-    prato.descricao = descricao
+    prato.ingredientes = ingredientes
     prato.preco = preco
     await this.pratoRepository.save(prato)
     return right({ prato })

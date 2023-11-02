@@ -5,11 +5,11 @@ export class PratoPresenter {
     return {
       id: prato.id.toString(),
       nome: prato.nome,
-      descricao: prato.descricao,
+      ingredientes: prato.ingredientes,
       preco: prato.preco,
       ativo: prato.ativo,
       incluido_em: prato.incluidoEm,
-      atualizado_em: prato.atualizadoEm,
+      alterado_em: prato.atualizadoEm,
     }
   }
 }

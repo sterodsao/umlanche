@@ -5,7 +5,7 @@ import { InvalidArgumentPrecoError } from './errors/invalid-argument-preco'
 
 export interface CriarPratoUseCaseRequest {
   nome: string
-  descricao: string
+  ingredientes: string
   preco: number
 }
 
@@ -19,11 +19,11 @@ export class CriarPratoUseCase {
 
   async execute({
     nome,
-    descricao,
+    ingredientes,
     preco,
   }: CriarPratoUseCaseRequest): Promise<CriarPratoUseCaseResponse> {
     if (preco < 0) return left(new InvalidArgumentPrecoError(preco.toString()))
-    const prato = Prato.create({ nome, descricao, preco })
+    const prato = Prato.create({ nome, ingredientes, preco })
     await this.pratoRepository.create(prato)
     return right({ prato })
   }

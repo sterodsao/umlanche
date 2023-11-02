@@ -13,11 +13,11 @@ datasource db {
 model Prato {
   id_prato String @id(map: "pk_prato") @db.Uuid @default(uuid())
   ds_nome String @db.VarChar(100)
-  ds_descricao String @db.VarChar(200)
+  ds_ingredientes String @db.VarChar(200)
   vl_preco Int @db.Integer
   fg_ativo Boolean @db.Boolean @default(true)
   incluido_em DateTime @db.Timestamp() @default(now())
-  atualizado_em DateTime @db.Timestamp() @updatedAt
+  alterado_em DateTime @db.Timestamp() @updatedAt
 
   @@map("prato")
 }
