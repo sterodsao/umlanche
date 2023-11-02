@@ -30,11 +30,11 @@ describe('Atualizar prato (E2E)', () => {
     const pratoId = prato.id.toString()
 
     const response = await request(app.getHttpServer())
-      .put(`/prato/${pratoId}`)
+      .patch(`/prato/${pratoId}`)
       .send({
         nome: 'Prato atualizado',
         ingredientes: 'Descrição nova',
-        preco: 5,
+        preco: 56.15,
       })
 
     console.log(response.body.errors)

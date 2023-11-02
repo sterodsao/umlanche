@@ -34,6 +34,6 @@ describe('Criar prato (E2E)', () => {
     })
 
     expect(pratoOnDatabase).toBeTruthy()
-    expect(pratoOnDatabase.vl_preco.toNumber()).toEqual(29.36)
+    expect(pratoOnDatabase.vl_preco).toEqual(2936)
   })
 })
