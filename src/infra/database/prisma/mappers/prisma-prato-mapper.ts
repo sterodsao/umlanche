@@ -8,7 +8,7 @@ export class PrismaPratoMapper {
       {
         nome: raw.ds_nome,
         descricao: raw.ds_descricao,
-        preco: raw.vl_preco.toNumber(),
+        preco: (raw.vl_preco /= 100),
         ativo: raw.fg_ativo,
         incluidoEm: raw.incluido_em,
         atualizadoEm: raw.atualizado_em,
@@ -22,7 +22,7 @@ export class PrismaPratoMapper {
       id_prato: prato.id.toString(),
       ds_nome: prato.nome,
       ds_descricao: prato.descricao,
-      vl_preco: prato.preco,
+      vl_preco: (prato.preco *= 100),
       fg_ativo: prato.ativo,
       incluido_em: prato.incluidoEm,
       atualizado_em: prato.atualizadoEm,
