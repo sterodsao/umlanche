@@ -59,7 +59,7 @@ export class Prato extends Entity<PratoProps> {
   }
 
   get eRecente() {
-    return dayjs().diff(this.incluidoEm, 'days') <= 10
+    return dayjs().diff(this.props.incluidoEm, 'days') <= 30
   }
 
   private atualiza() {

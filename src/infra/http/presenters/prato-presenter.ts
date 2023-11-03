@@ -8,6 +8,7 @@ export class PratoPresenter {
       ingredientes: prato.ingredientes,
       preco: prato.preco,
       ativo: prato.ativo,
+      novidade: prato.eRecente,
       incluido_em: prato.incluidoEm,
       alterado_em: prato.atualizadoEm,
     }
