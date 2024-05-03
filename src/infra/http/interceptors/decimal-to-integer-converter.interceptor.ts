@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators'
 
 @Injectable()
 export class DecimalToIntegerInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     console.log('Before...')
 
     console.log(context.switchToHttp().getRequest().body.nome)

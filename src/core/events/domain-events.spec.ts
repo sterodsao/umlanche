@@ -18,11 +18,11 @@ class CustomAggregateCreated implements DomainEvent {
   }
 }
 
-interface CustomAggregateProps {}
+type CustomAggregateProps = unknown
 
 class CustomAggregate extends AggregateRoot<CustomAggregateProps> {
   static create(props, id?: EntityID) {
-    const aggregate = new CustomAggregate({...props}, id)
+    const aggregate = new CustomAggregate({ ...props }, id)
 
     aggregate.addDomainEvent(new CustomAggregateCreated(aggregate))
 
