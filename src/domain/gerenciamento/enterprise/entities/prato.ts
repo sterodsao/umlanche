@@ -1,5 +1,5 @@
 import { Entity } from '@/core/entities/entity'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { EntityID } from '@/core/entities/entity-id'
 import { Optional } from '@/core/types/optional'
 
 import dayjs from 'dayjs'
@@ -68,7 +68,7 @@ export class Prato extends Entity<PratoProps> {
 
   static create(
     props: Optional<PratoProps, 'incluidoEm' | 'ativo'>,
-    id?: UniqueEntityID,
+    id?: EntityID,
   ) {
     return new Prato(
       {

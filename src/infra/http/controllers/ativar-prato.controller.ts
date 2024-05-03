@@ -14,7 +14,7 @@ export class AtivarPratoController {
   @Patch()
   @HttpCode(204)
   async handle(@Param('id') idPrato: string) {
-    const result = await this.sut.execute({ pratoId: idPrato })
+    const result = await this.sut.execute({ pratoId: Number(idPrato) })
     if (result.isLeft()) throw new BadRequestException(result.value.message)
   }
 }

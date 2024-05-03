@@ -1,4 +1,4 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { EntityID } from '@/core/entities/entity-id'
 import {
   PratoProps,
   Prato,
@@ -10,7 +10,7 @@ import { Injectable } from '@nestjs/common'
 
 export function makePratoFactory(
   override: Partial<PratoProps> = {},
-  id?: UniqueEntityID,
+  id?: EntityID,
 ) {
   return Prato.create(
     {

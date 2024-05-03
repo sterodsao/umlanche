@@ -28,7 +28,7 @@ export class AtualizarPratoController {
   @HttpCode(204)
   async handle(
     @Body(bodyValidationPipe) body: AtualizarPratoBodySchema,
-    @Param('id') pratoId: string,
+    @Param('id') pratoId: number,
   ) {
     const { nome, ingredientes, preco } = body
 

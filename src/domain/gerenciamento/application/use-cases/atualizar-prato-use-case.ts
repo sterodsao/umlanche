@@ -6,7 +6,7 @@ import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-e
 import { BadRequestException } from '@nestjs/common'
 
 export interface AtualizarPratoUseCaseRequest {
-  pratoId: string
+  pratoId: number
   nome?: string
   ingredientes?: string
   preco?: number

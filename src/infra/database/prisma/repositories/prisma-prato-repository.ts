@@ -10,7 +10,7 @@ import { PrismaPratoMapper } from '../mappers/prisma-prato-mapper'
 export class PrismaPratoRepository implements PratoRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findById(id: string): Promise<Prato | null> {
+  async findById(id: number): Promise<Prato | null> {
     const prato = await this.prisma.prato.findUnique({
       where: {
         id_prato: id,
@@ -50,7 +50,7 @@ export class PrismaPratoRepository implements PratoRepository {
     await Promise.all([
       this.prisma.prato.update({
         where: {
-          id_prato: prato.id.toString(),
+          id_prato: prato.id.toValue(),
         },
         data,
       }),

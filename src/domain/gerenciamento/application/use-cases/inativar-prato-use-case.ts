@@ -3,7 +3,7 @@ import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-e
 import { PratoRepository } from '../repositories/prato-repository'
 
 export interface InativarPratoUseCaseRequest {
-  pratoId: string
+  pratoId: number
 }
 
 export type InativarPratoUseCaseResponse = Either<ResourceNotFoundError, null>
