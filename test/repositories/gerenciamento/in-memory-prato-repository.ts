@@ -5,8 +5,8 @@ import { Prato } from '@/domain/gerenciamento/enterprise/entities/prato'
 export class InMemoryPratoRepository implements PratoRepository {
   public items: Prato[] = []
 
-  async findById(id: string): Promise<Prato | null> {
-    const prato = this.items.find((item) => item.id.toString() === id)
+  async findById(id: number): Promise<Prato | null> {
+    const prato = this.items.find((item) => item.id.toValue() === id)
 
     if (!prato) {
       return null

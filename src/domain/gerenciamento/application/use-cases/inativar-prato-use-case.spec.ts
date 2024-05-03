@@ -5,6 +5,7 @@ import {
   InativarPratoUseCase,
   InativarPratoUseCaseRequest,
 } from './inativar-prato-use-case'
+import { EntityID } from '@/core/entities/entity-id'
 
 let inMemoryPratoRepository: InMemoryPratoRepository
 let sut: InativarPratoUseCase
@@ -17,7 +18,7 @@ beforeEach(() => {
 test('Dado um prato que não existe, ao executar o caso de uso InativarPrato, então ele deve retornar um erro de Recurso não encontrado.', async () => {
   // Given
   const request: InativarPratoUseCaseRequest = {
-    pratoId: '1',
+    pratoId: 1,
   }
 
   // When
@@ -29,12 +30,12 @@ test('Dado um prato que não existe, ao executar o caso de uso InativarPrato, en
 })
 
 test('Dado um prato válido que pertence ao negocio correto, ao executar o caso de uso InativarPrato, ele deve ser desativado e salvo no repositório.', async () => {
-  const prato = makePratoFactory()
+  const prato = makePratoFactory(null, new EntityID(2))
   inMemoryPratoRepository.items.push(prato)
 
   // Given
   const request: InativarPratoUseCaseRequest = {
-    pratoId: prato.id.toString(),
+    pratoId: prato.id.toValue(),
   }
 
   // When

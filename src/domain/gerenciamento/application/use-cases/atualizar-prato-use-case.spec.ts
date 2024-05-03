@@ -7,6 +7,7 @@ import {
   AtualizarPratoUseCaseRequest,
 } from './atualizar-prato-use-case'
 import { InvalidArgumentPrecoError } from './errors/invalid-argument-preco'
+import { EntityID } from '@/core/entities/entity-id'
 
 let inMemoryPratoRepository: InMemoryPratoRepository
 let sut: AtualizarPratoUseCase
@@ -19,7 +20,7 @@ beforeEach(() => {
 test('Dado um prato que não existe, ao executar o caso de uso AtualizarPrato, ele deve retornar um erro de Recurso não encontrado.', async () => {
   // Given
   const request: AtualizarPratoUseCaseRequest = {
-    pratoId: '1',
+    pratoId: 1,
     nome: 'Novo nome',
     ingredientes: 'Nova descrição',
     preco: 10,
@@ -36,11 +37,11 @@ test('Dado um prato que não existe, ao executar o caso de uso AtualizarPrato, e
 
 test('Dado um prato válido, ao executar o caso de uso EditarPrato, ele deve ser atualizado e salvo no repositório.', async () => {
   // Given
-  const prato = makePratoFactory()
+  const prato = makePratoFactory(null, new EntityID(2))
   inMemoryPratoRepository.items.push(prato)
 
   const request: AtualizarPratoUseCaseRequest = {
-    pratoId: prato.id.toString(),
+    pratoId: prato.id.toValue(),
     nome: 'Novo nome',
     ingredientes: 'Nova descrição',
     preco: 10,
@@ -58,7 +59,7 @@ test('Dado um prato válido, ao executar o caso de uso EditarPrato, ele deve ser
 
   // Verificar se o serviço foi atualizado no repositório
   const pratoAtualizado = await inMemoryPratoRepository.findById(
-    prato.id.toString(),
+    prato.id.toValue(),
   )
   expect(pratoAtualizado).toBeDefined()
   expect(pratoAtualizado?.nome).toEqual(request.nome)
@@ -71,7 +72,7 @@ test('Ao fornecer parâmetros de entrada inválidos, ele deve retornar um erro d
 
   // Given
   const request: AtualizarPratoUseCaseRequest = {
-    pratoId: prato.id.toString(),
+    pratoId: prato.id.toValue(),
     nome: 'Novo nome',
     ingredientes: 'Nova descrição',
     preco: -10,

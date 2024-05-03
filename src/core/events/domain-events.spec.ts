@@ -18,9 +18,11 @@ class CustomAggregateCreated implements DomainEvent {
   }
 }
 
-class CustomAggregate extends AggregateRoot<null> {
-  static create() {
-    const aggregate = new CustomAggregate(null)
+interface CustomAggregateProps {}
+
+class CustomAggregate extends AggregateRoot<CustomAggregateProps> {
+  static create(props, id?: EntityID) {
+    const aggregate = new CustomAggregate({...props}, id)
 
     aggregate.addDomainEvent(new CustomAggregateCreated(aggregate))
 
@@ -36,7 +38,7 @@ describe('domain events', () => {
     DomainEvents.register(callbackSpy, CustomAggregateCreated.name)
 
     // Estou criando uma resposta porém SEM salvar no banco
-    const aggregate = CustomAggregate.create()
+    const aggregate = CustomAggregate.create(null, new EntityID(1))
 
     // Estou assegurando que o evento foi criado porém NÃO foi disparado
     expect(aggregate.domainEvents).toHaveLength(1)
