@@ -7,7 +7,7 @@ import request from 'supertest'
 import { PratoFactory } from 'test/factories/gerenciamento/make-prato-factory'
 import { EntityID } from '@/core/entities/entity-id'
 
-describe('Atualizar prato (E2E)', () => {
+describe('Criar prato pedido (E2E)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let pratoFactory: PratoFactory
@@ -19,34 +19,32 @@ describe('Atualizar prato (E2E)', () => {
     }).compile()
 
     app = moduleRef.createNestApplication()
-
     prisma = moduleRef.get(PrismaService)
     pratoFactory = moduleRef.get(PratoFactory)
 
     await app.init()
   })
 
-  test('[PUT] /prato/:id', async () => {
-    const prato = await pratoFactory.makePrismaPrato(null, new EntityID(1))
+  test('[POST] /prato/pedido', async () => {
+    const prato = await pratoFactory.makePrismaPrato(
+      { ativo: true },
+      new EntityID(1),
+    )
     const pratoId = prato.id.toValue()
 
     const response = await request(app.getHttpServer())
-      .patch(`/prato/${pratoId}`)
+      .post('/prato/pedido')
       .send({
-        nome: 'Prato atualizado',
-        ingredientes: 'Descrição nova',
-        preco: 56.15,
+        pratoId,
       })
 
-    expect(response.statusCode).toBe(204)
+    expect(response.statusCode).toBe(201)
 
-    const questionOnDatabase = await prisma.prato.findFirst({
-      where: {
-        ds_nome: 'Prato atualizado',
-        ds_ingredientes: 'Descrição nova',
-      },
+    const pratoOnDatabase = await prisma.pedido.findFirst({
+      where: { id_prato: pratoId },
     })
 
-    expect(questionOnDatabase).toBeTruthy()
+    expect(pratoOnDatabase).toBeTruthy()
+    expect(pratoOnDatabase.id_prato).toEqual(pratoId)
   })
 })

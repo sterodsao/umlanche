@@ -4,14 +4,14 @@ export class EntityID {
   private value: number | string
 
   toString() {
-    return this.value
+    return this.value.toString()
   }
 
   toValue() {
     return Number(this.value)
   }
 
-  constructor(value?: number) {
+  constructor(value?: number | string) {
     this.value = value ?? randomUUID()
   }
 

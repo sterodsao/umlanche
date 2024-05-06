@@ -11,6 +11,10 @@ import { NestAtivarPratoUseCase } from '../nest/nest-ativar-prato-use-case'
 import { AtivarPratoController } from './controllers/ativar-prato.controller'
 import { AtualizarPratoController } from './controllers/atualizar-prato.controller'
 import { NestAtualizarPratoUseCase } from '../nest/nest-atualizar-prato-use-case'
+import { NestCriarPratoPedidoUseCase } from '../nest/nest-criar-prato-pedido-use-case'
+import { CriarPratoPedidoController } from './controllers/criar-prato-pedido.controller'
+import { ValidarStatusPratoPedidoController } from './controllers/validar-status-prato-pedido.controller'
+import { NestValidarPratoPedidoUseCase } from '../nest/nest-validar-prato-pedido-use-case'
 
 @Module({
   imports: [DatabaseModule],
@@ -20,6 +24,8 @@ import { NestAtualizarPratoUseCase } from '../nest/nest-atualizar-prato-use-case
     InativarPratoController,
     AtivarPratoController,
     AtualizarPratoController,
+    CriarPratoPedidoController,
+    ValidarStatusPratoPedidoController,
   ],
   providers: [
     NestCriarPratoUseCase,
@@ -27,6 +33,8 @@ import { NestAtualizarPratoUseCase } from '../nest/nest-atualizar-prato-use-case
     NestInativarPratoUseCase,
     NestAtivarPratoUseCase,
     NestAtualizarPratoUseCase,
+    NestCriarPratoPedidoUseCase,
+    NestValidarPratoPedidoUseCase,
   ],
 })
 export class HttpModule {}

@@ -5,6 +5,7 @@ import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
 import { PratoFactory } from 'test/factories/gerenciamento/make-prato-factory'
+import { EntityID } from '@/core/entities/entity-id'
 
 describe('Inativar prato (E2E)', () => {
   let app: INestApplication
@@ -26,8 +27,11 @@ describe('Inativar prato (E2E)', () => {
   })
 
   test('[PATCH] /prato/:id/inativar', async () => {
-    const prato = await pratoFactory.makePrismaPrato({ ativo: true })
-    const pratoId = prato.id.toString()
+    const prato = await pratoFactory.makePrismaPrato(
+      { ativo: true },
+      new EntityID(1),
+    )
+    const pratoId = prato.id.toValue()
 
     const response = await request(app.getHttpServer())
       .patch(`/prato/${pratoId}/inativar`)

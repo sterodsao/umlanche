@@ -28,12 +28,12 @@ export class AtualizarPratoController {
   @HttpCode(204)
   async handle(
     @Body(bodyValidationPipe) body: AtualizarPratoBodySchema,
-    @Param('id') pratoId: number,
+    @Param('id') pratoId: string,
   ) {
     const { nome, ingredientes, preco } = body
 
     const result = await this.sut.execute({
-      pratoId,
+      pratoId: Number(pratoId),
       nome,
       ingredientes,
       preco,

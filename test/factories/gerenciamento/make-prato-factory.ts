@@ -25,10 +25,13 @@ export function makePratoFactory(
 
 @Injectable()
 export class PratoFactory {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
-  async makePrismaPrato(data: Partial<PratoProps> = {}): Promise<Prato> {
-    const prato = makePratoFactory(data)
+  async makePrismaPrato(
+    data: Partial<PratoProps> = {},
+    id?: EntityID,
+  ): Promise<Prato> {
+    const prato = makePratoFactory(data, id)
 
     await this.prisma.prato.create({
       data: PrismaPratoMapper.toPrisma(prato),

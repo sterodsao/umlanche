@@ -18,6 +18,18 @@ model Prato {
   fg_ativo        Boolean  @default(true) @db.Boolean
   incluido_em     DateTime @default(now()) @db.Timestamp()
   alterado_em     DateTime @updatedAt @db.Timestamp()
+  pedidos Pedido[]
 
   @@map("prato")
+}
+
+model Pedido {
+  id_prato_pedido Int @id(map: "pk_pedido") @default(autoincrement()) @db.Integer
+  id_prato Int
+  id_externo String @default(uuid()) @db.Uuid
+  solicitado_em DateTime @default(now()) @db.Timestamp()
+  retirado_em DateTime?
+  prato Prato @relation(fields: [id_prato], references: [id_prato])
+
+  @@map("pedido")
 }
