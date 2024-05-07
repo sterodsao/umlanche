@@ -8,9 +8,9 @@ export class CriarPratoPedidoController {
 
   @Post()
   async handle(@Body() body: CriarPratoPedidoRequestDto) {
-    const { pratoId } = body
+    const { pratoId, emailResponsavel } = body
 
-    const result = await this.sut.execute({ pratoId })
+    const result = await this.sut.execute({ pratoId, emailResponsavel })
 
     if (result.isLeft()) throw new BadRequestException()
   }

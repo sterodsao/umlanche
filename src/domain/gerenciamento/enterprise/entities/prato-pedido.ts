@@ -4,6 +4,7 @@ import { Optional } from '@/core/types/optional'
 
 export interface PratoPedidoProps extends PedidoProps {
   pratoId: EntityID
+  emailResponsavel: string
 }
 
 export class PratoPedido extends Pedido<PratoPedidoProps> {
@@ -17,6 +18,10 @@ export class PratoPedido extends Pedido<PratoPedidoProps> {
 
   get statusPratoPedidoConcluido() {
     return !!this.props.retiradoEm
+  }
+
+  get emailResponsavel() {
+    return this.props.emailResponsavel
   }
 
   static create(

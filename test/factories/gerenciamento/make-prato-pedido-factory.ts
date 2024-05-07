@@ -5,6 +5,7 @@ import {
 } from '@/domain/gerenciamento/enterprise/entities/prato-pedido'
 import { PrismaPratoPedidoMapper } from '@/infra/database/prisma/mappers/prisma-prato-pedido-mapper'
 import { PrismaService } from '@/infra/database/prisma/prisma.service'
+import { faker } from '@faker-js/faker'
 import { Injectable } from '@nestjs/common'
 import { randomUUID } from 'crypto'
 
@@ -16,6 +17,7 @@ export function makePratoPedidoFactory(
     {
       pratoId: new EntityID(1),
       idExterno: new EntityID(randomUUID()),
+      emailResponsavel: faker.internet.email(),
       ...override,
     },
     id,

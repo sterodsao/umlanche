@@ -15,9 +15,10 @@ import { NestCriarPratoPedidoUseCase } from '../nest/nest-criar-prato-pedido-use
 import { CriarPratoPedidoController } from './controllers/criar-prato-pedido.controller'
 import { ValidarStatusPratoPedidoController } from './controllers/validar-status-prato-pedido.controller'
 import { NestValidarPratoPedidoUseCase } from '../nest/nest-validar-prato-pedido-use-case'
+import { CryptographyModule } from '../cryptography/cryptography.module'
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, CryptographyModule],
   controllers: [
     CriarPratoController,
     ObterPratosController,

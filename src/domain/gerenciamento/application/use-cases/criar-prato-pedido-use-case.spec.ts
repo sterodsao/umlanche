@@ -8,17 +8,21 @@ import { makePratoFactory } from 'test/factories/gerenciamento/make-prato-factor
 import { EntityID } from '@/core/entities/entity-id'
 import { PratoPedido } from '../../enterprise/entities/prato-pedido'
 import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-error'
+import { FakeHasher } from 'test/cryptography/fake-hasher'
 
 let inMemoryPratoRepository: InMemoryPratoRepository
 let inMemoryPratoPedidoRepository: InMemoryPratoPedidoRepository
+let fakeHasher: FakeHasher
 let sut: CriarPratoPedidoUseCase
 
 beforeEach(() => {
   inMemoryPratoRepository = new InMemoryPratoRepository()
   inMemoryPratoPedidoRepository = new InMemoryPratoPedidoRepository()
+  fakeHasher = new FakeHasher()
   sut = new CriarPratoPedidoUseCase(
     inMemoryPratoRepository,
     inMemoryPratoPedidoRepository,
+    fakeHasher,
   )
 })
 
@@ -29,9 +33,11 @@ test('Dado informações válidas, ao executar o caso de uso CriarPratoPedido, e
   // Given
   const request: CriarPratoPedidoUseCaseRequest = {
     pratoId: 1,
+    emailResponsavel: 'test@mail.com',
   }
   // When
   const result = await sut.execute(request)
+  const hashedEmailResponsavel = await fakeHasher.hash('test@mail.com')
   // Then
   expect(result.isLeft()).toBeFalsy()
   expect(result.isRight()).toBeTruthy()
@@ -44,12 +50,16 @@ test('Dado informações válidas, ao executar o caso de uso CriarPratoPedido, e
   expect(inMemoryPratoPedidoRepository.items[0]).toEqual(
     (result.value as { pratoPedido: PratoPedido }).pratoPedido,
   )
+  expect(inMemoryPratoPedidoRepository.items[0].emailResponsavel).toEqual(
+    hashedEmailResponsavel,
+  )
 })
 
 test('Dado informações inválidas, ao executar o caso de uso CriarPrato, então ele deve retornar o erro InvalidArgumentPrecoError.', async () => {
   // Given
   const request: CriarPratoPedidoUseCaseRequest = {
     pratoId: 2,
+    emailResponsavel: 'test@mail.com',
   }
   // When
   const result = await sut.execute(request)

@@ -8,6 +8,7 @@ export class PrismaPratoPedidoMapper {
       {
         pratoId: new EntityID(raw.id_prato),
         idExterno: new EntityID(raw.id_externo),
+        emailResponsavel: raw.ds_email_responsavel,
         retiradoEm: raw.retirado_em,
         solicitadoEm: raw.solicitado_em,
       },
@@ -19,6 +20,7 @@ export class PrismaPratoPedidoMapper {
     return {
       id_prato: pratoPedido.pratoId.toValue(),
       id_externo: pratoPedido.idExterno.toString(),
+      ds_email_responsavel: pratoPedido.emailResponsavel,
       solicitado_em: pratoPedido.solicitadoEm,
       retirado_em: pratoPedido.retiradoEm,
     }
