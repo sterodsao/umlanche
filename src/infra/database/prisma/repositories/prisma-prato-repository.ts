@@ -1,6 +1,5 @@
 import { PratoRepository } from '@/domain/gerenciamento/application/repositories/prato-repository'
 import { PrismaService } from '../prisma.service'
-import { DomainEvents } from '@/core/events/domain-events'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { Prato } from '@/domain/gerenciamento/enterprise/entities/prato'
 import { Injectable } from '@nestjs/common'
@@ -55,7 +54,5 @@ export class PrismaPratoRepository implements PratoRepository {
         data,
       }),
     ])
-
-    DomainEvents.dispatchEventsForAggregate(prato.id)
   }
 }

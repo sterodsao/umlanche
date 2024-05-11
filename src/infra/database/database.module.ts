@@ -4,6 +4,8 @@ import { PratoRepository } from '@/domain/gerenciamento/application/repositories
 import { PrismaPratoRepository } from './prisma/repositories/prisma-prato-repository'
 import { PratoPedidoRepository } from '@/domain/gerenciamento/application/repositories/prato-pedido-repository'
 import { PrismaPratoPedidoRepository } from './prisma/repositories/prisma-prato-pedido-repository'
+import { NotificacaoRepository } from '@/domain/notificacao/application/repositories/notificacao-repository'
+import { PrismaNotificacaoRepository } from './prisma/repositories/prisma-notificacao-repository'
 
 @Module({
   providers: [
@@ -16,7 +18,16 @@ import { PrismaPratoPedidoRepository } from './prisma/repositories/prisma-prato-
       provide: PratoPedidoRepository,
       useClass: PrismaPratoPedidoRepository,
     },
+    {
+      provide: NotificacaoRepository,
+      useClass: PrismaNotificacaoRepository,
+    },
   ],
-  exports: [PrismaService, PratoRepository, PratoPedidoRepository],
+  exports: [
+    PrismaService,
+    PratoRepository,
+    PratoPedidoRepository,
+    NotificacaoRepository,
+  ],
 })
 export class DatabaseModule {}
