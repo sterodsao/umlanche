@@ -12,7 +12,7 @@ export class PrismaPratoPedidoMapper {
         retiradoEm: raw.retirado_em,
         solicitadoEm: raw.solicitado_em,
       },
-      new EntityID(raw.id_prato_pedido),
+      new EntityID(raw.id_pedido),
     )
   }
 

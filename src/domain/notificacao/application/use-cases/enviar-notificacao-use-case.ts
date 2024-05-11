@@ -19,7 +19,7 @@ export type EnviarNotificacaoUseCaseResponse = Either<
 
 @Injectable()
 export class EnviarNotificacaoUseCase {
-  constructor(private notificacaosRepository: NotificacaoRepository) {}
+  constructor(private notificacaoRepository: NotificacaoRepository) {}
 
   async execute({
     identificadorId,
@@ -32,7 +32,7 @@ export class EnviarNotificacaoUseCase {
       conteudo,
     })
 
-    await this.notificacaosRepository.create(notificacao)
+    await this.notificacaoRepository.create(notificacao)
 
     return right({
       notificacao,

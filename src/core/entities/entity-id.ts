@@ -16,6 +16,6 @@ export class EntityID {
   }
 
   public equals(id: EntityID) {
-    return id.toValue() === this.value
+    return (id.toValue() || id.toString()) === this.value
   }
 }

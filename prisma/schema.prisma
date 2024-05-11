@@ -18,32 +18,28 @@ model Prato {
   fg_ativo        Boolean  @default(true) @db.Boolean
   incluido_em     DateTime @default(now()) @db.Timestamp()
   alterado_em     DateTime @updatedAt @db.Timestamp()
-  pedidos Pedido[]
+  pedidos         Pedido[]
 
   @@map("prato")
 }
 
 model Pedido {
-  id_prato_pedido Int @id(map: "pk_pedido") @default(autoincrement()) @db.Integer
-  id_prato Int
-  id_externo String @default(uuid()) @db.Uuid @unique(map: "ui_pedido_001")
-  ds_email_responsavel String @db.VarChar(100)
-  solicitado_em DateTime @default(now()) @db.Timestamp()
-  retirado_em DateTime?
-  prato Prato @relation(fields: [id_prato], references: [id_prato])
-
-  notificacoes Notificacao[]
+  id_pedido            Int       @id(map: "pk_pedido") @default(autoincrement()) @db.Integer
+  id_prato             Int
+  id_externo           String    @unique(map: "ui_pedido_001") @default(uuid()) @db.Uuid
+  ds_email_responsavel String    @db.VarChar(100)
+  solicitado_em        DateTime  @default(now()) @db.Timestamp()
+  retirado_em          DateTime?
+  prato                Prato     @relation(fields: [id_prato], references: [id_prato])
 
   @@map("pedido")
 }
 
 model Notificacao {
-  id          String    @id @default(uuid())
-  identificadorId String    @map("identificador_id") @db.Uuid
-  titulo       String
-  conteudo     String
-
-  pedido Pedido @relation(fields: [identificadorId], references: [id_externo])
+  id         String @id @default(uuid())
+  id_externo String @map("id_externo") @db.Uuid
+  titulo     String
+  conteudo   String
 
   @@map("notificacao")
 }

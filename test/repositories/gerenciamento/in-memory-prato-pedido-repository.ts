@@ -1,3 +1,4 @@
+import { DomainEvents } from '@/core/events/domain-events'
 import { PratoPedidoRepository } from '@/domain/gerenciamento/application/repositories/prato-pedido-repository'
 import { PratoPedido } from '@/domain/gerenciamento/enterprise/entities/prato-pedido'
 
@@ -18,5 +19,7 @@ export class InMemoryPratoPedidoRepository implements PratoPedidoRepository {
 
   async create(pratoPedido: PratoPedido): Promise<void> {
     this.items.push(pratoPedido)
+
+    DomainEvents.dispatchEventsForAggregate(pratoPedido.id)
   }
 }

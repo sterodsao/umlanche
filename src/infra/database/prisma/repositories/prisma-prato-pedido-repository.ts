@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma.service'
 import { Injectable } from '@nestjs/common'
 import { PratoPedido } from '@/domain/gerenciamento/enterprise/entities/prato-pedido'
 import { PrismaPratoPedidoMapper } from '../mappers/prisma-prato-pedido-mapper'
+import { DomainEvents } from '@/core/events/domain-events'
 
 @Injectable()
 export class PrismaPratoPedidoRepository implements PratoPedidoRepository {
@@ -26,5 +27,7 @@ export class PrismaPratoPedidoRepository implements PratoPedidoRepository {
     const data = PrismaPratoPedidoMapper.toPrisma(pratoPedido)
 
     await this.prisma.pedido.create({ data })
+
+    DomainEvents.dispatchEventsForAggregate(pratoPedido.id)
   }
 }

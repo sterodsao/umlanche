@@ -8,7 +8,7 @@ export class PrismaNotificacaoMapper {
       {
         titulo: raw.titulo,
         conteudo: raw.conteudo,
-        identificadorId: new EntityID(raw.identificadorId),
+        identificadorId: new EntityID(raw.id_externo),
       },
       new EntityID(raw.id),
     )
@@ -19,7 +19,7 @@ export class PrismaNotificacaoMapper {
   ): Prisma.NotificacaoUncheckedCreateInput {
     return {
       id: notificacao.id.toString(),
-      identificadorId: notificacao.identificadorId.toString(),
+      id_externo: notificacao.identificadorId.toString(),
       titulo: notificacao.titulo,
       conteudo: notificacao.conteudo,
     }
