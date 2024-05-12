@@ -9,6 +9,8 @@ import { makePratoFactory } from 'test/factories/gerenciamento/make-prato-factor
 import { EntityID } from '@/core/entities/entity-id'
 import { makePratoPedidoFactory } from 'test/factories/gerenciamento/make-prato-pedido-factory'
 import { PratoPedido } from '../../enterprise/entities/prato-pedido'
+import { InvalidUuidError } from '@/core/errors/errors/invalid-uuid-error'
+import { randomUUID } from 'crypto'
 
 let inMemoryPratoPedidoRepository: InMemoryPratoPedidoRepository
 let inMemoryPratoRepository: InMemoryPratoRepository
@@ -29,14 +31,15 @@ test('Dado um pedido que não existe, ao executar o caso de uso ValidarStatusPra
   const result = await sut.execute(request)
   // Then
   expect(result.isLeft()).toBeTruthy()
-  expect(result.value instanceof ResourceNotFoundError).toBeTruthy()
+  expect(result.value instanceof InvalidUuidError).toBeTruthy()
 })
 
 test('Dado um pedido válido, ao executar o caso de uso ValidarStatusPratoPedidoUseCase, então ele deve retornar os dados do pedido.', async () => {
-  const prato = makePratoFactory(null, new EntityID(1))
+  const idExterno = randomUUID()
+  const prato = makePratoFactory(null, new EntityID(idExterno))
   inMemoryPratoRepository.items.push(prato)
   const pratoPedido = makePratoPedidoFactory(
-    { idExterno: new EntityID('1'), pratoId: prato.id },
+    { idExterno: new EntityID(idExterno), pratoId: prato.id },
     new EntityID(1),
   )
   inMemoryPratoPedidoRepository.items.push(pratoPedido)
